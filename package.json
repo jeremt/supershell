@@ -1,6 +1,6 @@
 {
   "name": "supershell",
-  "version": "0.0.5",
+  "version": "0.0.8",
   "description": "Simple utility to easily manipulate shell commands.",
   "author": "Jeremie Taboada <taboada.jeremie@gmail.com>",
   "keywords": [
@@ -17,10 +17,13 @@
   },
   "files": [
     "index.js",
+    "lib/supershell.js",
     "lib/command.js",
     "lib/config.js",
     "lib/parsers.js",
-    "lib/queue.js"
+    "lib/queue.js",
+    "lib/stringutils.js",
+    "lib/log.js"
   ],
   "readmeFilename": "README.md",
   "homepage": "https://github.com/jeremt/supershell"
