@@ -72,14 +72,14 @@ sh.exec('ls file_not_found')
 ### Create a parser
 
 You can easily create your own parser as a closure or a simple function callback:
-```
+```js
 // create parsers
 
 function upperCase(output) {
   return output.toUpperCase();
 }
 
-functon replace(source, dest) {
+function replace(source, dest) {
   return function (output) {
     return output.replace(source, dest);
   }
@@ -89,6 +89,11 @@ functon replace(source, dest) {
 var sh = require('supershell');
 
 sh.exec('ls')
+  .pipe(upperCase)
+  .pipe(replace('a', 'b'))
+  .on('success', function (output) {
+    console.log(output);
+  });
 ```
 
 History
