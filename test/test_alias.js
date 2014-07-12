@@ -1,5 +1,5 @@
 
-var sh = require('../lib');
+var sh = require('../');
 
 sh.config.setAlias('lsHidden', 'ls', ['-a']);
 sh.config.setAlias('lsFull', new sh.Command('ls', ['-l']));

@@ -1,5 +1,5 @@
 
-var sh = require('../lib');
+var sh = require('../');
 
 sh.log.on('error', function (message) {
   console.error('SupershellError: ', message);

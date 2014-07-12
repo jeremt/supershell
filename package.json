@@ -1,6 +1,6 @@
 {
   "name": "supershell",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "Simple utility to easily manipulate shell commands.",
   "author": "Jeremie Taboada <taboada.jeremie@gmail.com>",
   "keywords": [
@@ -11,12 +11,12 @@
     "type": "git",
     "url": "https://github.com/jeremt/supershell.git"
   },
-  "main": "lib/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "./test.sh"
   },
   "files": [
-    "lib/index.js",
+    "index.js",
     "lib/command.js",
     "lib/config.js",
     "lib/parsers.js",

@@ -1,5 +1,5 @@
 
-var sh = require('../lib');
+var sh = require('../');
 
 sh.exec('ls').and('echo', ['hello']);
 sh.exec('cd', ['..']).or('echo', 'should\'n be displayed');

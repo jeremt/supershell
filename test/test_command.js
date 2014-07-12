@@ -1,5 +1,5 @@
 
-var sh = require('../lib');
+var sh = require('../');
 
 function checkOutput(toCheck) {
   return function (output) {

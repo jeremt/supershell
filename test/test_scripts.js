@@ -1,5 +1,5 @@
 
-var sh = require('../lib');
+var sh = require('../');
 
 // the first argument is the function to call after the script.
 // Its first parameter is the output of the script, the second one is the
