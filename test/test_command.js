@@ -15,8 +15,8 @@ function logOutput() {
 
 var lsPrev = new sh.Command('cd', ['..']).and('ls', ['package.json']);
 
-sh.run('echo', ['coucou'])
-  .on('success', checkOutput('coucou\n'))
+sh.run('echo', ['hello'])
+  .on('success', checkOutput('hello\n'))
 
   .and('ls', ['lol'])
   .on('fail', checkOutput('ls: lol: No such file or directory\n'))
