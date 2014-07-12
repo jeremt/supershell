@@ -1,0 +1,9 @@
+{
+    "name": "supershell",
+    "version": "0.0.1",
+    "description": "Simple utility to easily manipulate shell commands.",
+    "author": "Jeremie Taboada <taboada.jeremie@gmail.com>",
+    "scripts": {
+        "test": "./test.sh"
+    }
+}
