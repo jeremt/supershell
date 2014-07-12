@@ -3,7 +3,21 @@
     "version": "0.0.1",
     "description": "Simple utility to easily manipulate shell commands.",
     "author": "Jeremie Taboada <taboada.jeremie@gmail.com>",
+    "keywords": ["shell", "command", "stream", "utility", "tools", "async"],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jeremt/supershell.git"
+    },
     "scripts": {
         "test": "./test.sh"
-    }
+    },
+    "files": [
+        "lib/index.js",
+        "lib/command.js",
+        "lib/config.js",
+        "lib/parsers.js",
+        "lib/queue.js"
+    ],
+    "readmeFilename": "README.md",
+    "homepage": "https://github.com/jeremt/supershell"
 }
