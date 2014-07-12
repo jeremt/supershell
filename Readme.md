@@ -28,7 +28,7 @@ The main supershell's feature is the command utiliy. It allow to easily chain co
 ```js
 var sh = require('supershell');
 
-sh.run('ls', ['-l'])
+sh.exec('ls', ['-l'])
 
   // if succeed then
   .and('echo', ['ls succeed!'])
@@ -43,7 +43,7 @@ sh.run('ls', ['-l'])
   });
 
 // Test with errors
-sh.run('ls file_not_found')
+sh.exec('ls file_not_found')
 
   .pipe(sh.parsers.trim())
 
@@ -69,6 +69,28 @@ sh.run('ls file_not_found')
   });
 ```
 
+### Create a parser
+
+You can easily create your own parser as a closure or a simple function callback:
+```
+// create parsers
+
+function upperCase(output) {
+  return output.toUpperCase();
+}
+
+functon replace(source, dest) {
+  return function (output) {
+    return output.replace(source, dest);
+  }
+}
+
+// use it
+var sh = require('supershell');
+
+sh.exec('ls')
+```
+
 History
 -------
 
@@ -77,7 +99,7 @@ An history of your commands will be saved within `supershell` module. You can ac
 ```js
 var sh = require('supershell');
 
-sh.run('ls').on('success', function () {
+sh.exec('ls').on('success', function () {
   // print the current history
   console.log(sh.config.history);
   // clean the history
@@ -97,12 +119,12 @@ var sh = require('supershell');
 sh.config.setAlias('lsHidden', 'ls', ['-a']);
 
 // then use it like any other command
-sh.run('lsHidden').on('success', function (output) {
+sh.exec('lsHidden').on('success', function (output) {
     console.assert(output.indexOf('..') !== -1);
 });
 
 // even add custom parameters
-sh.run('lsHidden', ['-l']).on('success', function (output) {
+sh.exec('lsHidden', ['-l']).on('success', function (output) {
     console.assert(output.indexOf('..') !== -1);
 });
 ```
@@ -110,6 +132,7 @@ sh.run('lsHidden', ['-l']).on('success', function (output) {
 TODO
 ----
 
+- handle pipes in json serialization
 - on progress event.
 - globing
 - queue

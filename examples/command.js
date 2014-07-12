@@ -1,7 +1,7 @@
 
 var sh = require('../lib');
 
-sh.run('ls', ['-l'])
+sh.exec('ls', ['-l'])
 
   // if succeed then
   .and('echo', ['ls succeed!'])
@@ -16,7 +16,7 @@ sh.run('ls', ['-l'])
   });
 
 // Test with errors
-sh.run('ls file_not_found')
+sh.exec('ls file_not_found')
 
   .pipe(sh.parsers.trim())
 

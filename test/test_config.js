@@ -23,4 +23,4 @@ sh.config.load({
   }
 });
 
-// sh.run('repeat', ['ls', 10]);
+// sh.exec('repeat', ['ls', 10]);
