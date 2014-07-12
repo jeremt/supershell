@@ -1,6 +1,13 @@
 SuperShell
 ==========
 
+Installation
+------------
+
+```
+$ npm install supershell
+```
+
 Command
 -------
 
