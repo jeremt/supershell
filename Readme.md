@@ -9,7 +9,7 @@ The main supershell's feature is the command utiliy. It allow to easily chain co
 ### Methods
 
 | Method | Description                                                       |
-==============================================================================
+|--------|-------------------------------------------------------------------|
 | pipe   | pipe the output of the command into another one, or into a parser |
 | and    | execute the given command if the previous one succeed             |
 | or     | execute the given command if the previous one failed              |
@@ -18,7 +18,7 @@ The main supershell's feature is the command utiliy. It allow to easily chain co
 ### Events
 
 | Name    | Description                                                      |
-==============================================================================
+|---------|------------------------------------------------------------------|
 | finish  | the command is finished                                          |
 | success | the command is finished successfuly                              |
 | fail    | the command has failed                                           |
@@ -74,7 +74,7 @@ History
 
 An history of your commands will be saved within `supershell` module. You can access it through the config that way:
 
-```
+```js
 var sh = require('supershell');
 
 sh.run('ls').on('success', function () {
@@ -90,7 +90,7 @@ Alias
 
 SuperShell provides a tool to register and use aliases on shell commands.
 
-```
+```js
 var sh = require('supershell');
 
 // register your alias via `setAlias` method
