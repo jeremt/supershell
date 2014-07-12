@@ -2,15 +2,15 @@
 var sh = require('../lib');
 
 function checkOutput(toCheck) {
-    return function (output) {
-        console.assert(output === toCheck);
-    }
+  return function (output) {
+    console.assert(output === toCheck);
+  }
 }
 
 function logOutput() {
-    return function (output) {
-        console.log(output);
-    }
+  return function (output) {
+    console.log(output);
+  }
 }
 
 var lsPrev = new sh.Command('echo', ['before ls']).and('ls', ['package.json']);

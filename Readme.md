@@ -1,6 +1,8 @@
 SuperShell
 ==========
 
+Simple utility to easily manipulate shell commands.
+
 Installation
 ------------
 

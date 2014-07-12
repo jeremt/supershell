@@ -1,6 +1,10 @@
 
 var sh = require('../lib');
 
+sh.log.on('error', function (message) {
+  console.error('SupershellError: ', message);
+});
+
 sh.config.load({
   history: [
     {cmd: 'ls', args: ['-a']}
@@ -9,18 +13,24 @@ sh.config.load({
     lsHidden: { cmd: 'ls', args: ['-a']}
   },
   vars: {
-    name: 'Jeremie',
-    size: 10
+    headSize: 3,
+    projectDir: '$HOME/Projects'
   },
-  scripts: {
-    repeat: function (cmd, n) {
-      for (var i = 0; i < n; ++i) {
-        nextCmd = cmd.clone();
-        cmd.and(nextCmd);
-        cmd = nextCmd;
-      }
-    }
-  }
+  scripts: {/* Add your scripts here */}
 });
 
-// sh.exec('repeat', ['ls', 10]);
+sh.exec('ls {projectDir}')
+  .pipe(sh.parsers.list())
+  .on('success', function (output) {
+    console.log(output);
+  });
+
+var lsRoot = new sh.Command('ls /');
+lsRoot
+  .pipe('head', ['-n {headSize}'])
+  .pipe(sh.parsers.list())
+  .on('success', function (output) {
+    console.log(output);
+  }).exec();
+
+sh.exec('ls').pipe('head -n 2');
