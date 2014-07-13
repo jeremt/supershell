@@ -1,6 +1,12 @@
 
 var sh = require('../');
 
+sh.log.on('message', function (level, message) {
+  console.log(level, message);
+})
+
+sh.log.mode = 'event';
+
 sh.config.setAlias('lsHidden', 'ls', ['-a']);
 sh.config.setAlias('lsFull', sh.cmd('ls', ['-l']));
 

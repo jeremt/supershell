@@ -13,6 +13,8 @@ function logOutput() {
   }
 }
 
+sh.log.mode = 'log';
+
 var lsPrev = sh.cmd('echo', ['before ls']).and('ls', ['package.json']);
 
 sh('echo', ['hello'])

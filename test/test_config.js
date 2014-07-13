@@ -1,10 +1,6 @@
 
 var sh = require('../');
 
-sh.log.on('error', function (message) {
-  console.error('SupershellError: ', message);
-});
-
 sh.config.load({
   history: [
     {cmd: 'ls', args: ['-a']}

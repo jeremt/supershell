@@ -1,7 +1,17 @@
 SuperShell
 ==========
 
-Simple utility to easily manipulate shell commands.
+Simple utility to easily manipulate shell commands. The most important thing about this API is that is fully asynchronous and stream/events based.
+
+It's very easy-to-use, but it also provides some powerful features.
+
+Simple example:
+
+```
+sh('ls').pipe('wc -l').on('success', function (output) {
+  console.log(output);
+});
+```
 
 Installation
 ------------
