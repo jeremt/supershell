@@ -37,7 +37,7 @@ The main supershell's feature is the command utiliy. It allow to easily chain co
 ```js
 var sh = require('supershell');
 
-sh.exec('ls', ['-l'])
+sh('ls', ['-l'])
 
   // if succeed then
   .and('echo', ['ls succeed!'])
@@ -52,7 +52,7 @@ sh.exec('ls', ['-l'])
   });
 
 // Test with errors
-sh.exec('ls file_not_found')
+sh('ls file_not_found')
 
   .pipe(sh.parsers.trim())
 
@@ -97,7 +97,7 @@ function replace(source, dest) {
 // use it
 var sh = require('supershell');
 
-sh.exec('ls')
+sh('ls')
   .pipe(upperCase)
   .pipe(replace('a', 'b'))
   .on('success', function (output) {
@@ -113,7 +113,7 @@ An history of your commands will be saved within `supershell` module. You can ac
 ```js
 var sh = require('supershell');
 
-sh.exec('ls').on('success', function () {
+sh('ls').on('success', function () {
   // print the current history
   console.log(sh.config.history);
   // clean the history
@@ -131,14 +131,20 @@ var sh = require('supershell');
 
 // register your alias via `setAlias` method
 sh.config.setAlias('lsHidden', 'ls', ['-a']);
+sh.config.setAlias('lsFull', sh.cmd('ls', ['-l']));
 
 // then use it like any other command
-sh.exec('lsHidden').on('success', function (output) {
+sh('lsHidden').on('success', function (output) {
     console.assert(output.indexOf('..') !== -1);
 });
 
+// or
+sh('lsFull').pipe(sh.parsers.list()).on('success', function (output) {
+  console.log(output);
+});
+
 // even add custom parameters
-sh.exec('lsHidden', ['-l']).on('success', function (output) {
+sh('lsHidden', ['-l']).on('success', function (output) {
     console.assert(output.indexOf('..') !== -1);
 });
 ```

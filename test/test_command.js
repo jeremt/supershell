@@ -13,9 +13,9 @@ function logOutput() {
   }
 }
 
-var lsPrev = new sh.Command('echo', ['before ls']).and('ls', ['package.json']);
+var lsPrev = sh.cmd('echo', ['before ls']).and('ls', ['package.json']);
 
-sh.exec('echo', ['hello'])
+sh('echo', ['hello'])
   .on('success', checkOutput('hello\n'))
 
   .and('ls', ['lol'])
@@ -32,11 +32,11 @@ sh.exec('echo', ['hello'])
 
 // pipe and parser
 
-var cmd = new sh.Command('ls');
+var cmd = sh('ls');
 cmd.pipe('wc', ['-l']).pipe(sh.parsers.trim()).on('success', function (output) {
   console.assert(parseInt(output) !== NaN);
-}).exec();
+});
 
-sh.exec('ls').pipe(sh.parsers.list()).on('success', function (output) {
+sh('ls').pipe(sh.parsers.list()).on('success', function (output) {
   console.assert(output.indexOf('package.json') !== -1);
 });

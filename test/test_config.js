@@ -12,25 +12,29 @@ sh.config.load({
   alias: {
     lsHidden: { cmd: 'ls', args: ['-a']}
   },
-  vars: {
+  scope: {
     headSize: 3,
     projectDir: '$HOME/Projects'
   },
   scripts: {/* Add your scripts here */}
 });
 
-sh.exec('ls {projectDir}')
+sh('ls {projectDir}')
   .pipe(sh.parsers.list())
   .on('success', function (output) {
     console.log(output);
   });
 
-var lsRoot = new sh.Command('ls /');
+var lsRoot = sh('ls /');
 lsRoot
   .pipe('head', ['-n {headSize}'])
   .pipe(sh.parsers.list())
   .on('success', function (output) {
     console.log(output);
-  }).exec();
+  });
 
-sh.exec('ls').pipe('head -n 2');
+sh('ls').pipe('head -n 2');
+
+sh('ls').pipe('grep', ['README']).on('success', function (output) {
+  console.assert(output === 'README.md\n');
+});
