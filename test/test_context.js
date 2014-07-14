@@ -33,21 +33,25 @@ workspace.command('create', function (e, name) {
   }
 });
 
-// workspace.refresh(500.0, function () {
-//   var _this = this;
-//   sh('ls', [_this.scope.path]).pipe(sh.parsers.list())
-//     .on('success', function (output) {
-//       _this.scope.list = output;
-//       _this.emit('refresh');
-//     })
-//     .on('fail', function (output) {
-//       _this.emit('error', output);
-//     });
-// });
+workspace.command('list', function (e) {
+  var _this = this;
+  sh('ls', [_this.scope.path])
+    .pipe(sh.parsers.trim())
+    .pipe(sh.parsers.list())
+    .on('success', function (output) {
+      _this.scope.list = output;
+      e.emit('success');
+    })
+    .on('fail', function (output) {
+      e.emit('fail', output);
+    });
+});
 
 workspace.on('refresh', function () {
   console.log('Refresh workspace...');
 });
+
+workspace.refresh(500.0, 'list');
 
 workspace.on('error', function (output) {
   console.log('error: ', output);
@@ -65,6 +69,6 @@ workspace.exec('create', 'test')
     console.log('failed: ' + output);
   });
 
-// setTimeout(function () {
-//   process.exit();
-// }, 3000.0);
+setTimeout(function () {
+  process.exit();
+}, 3000.0);
