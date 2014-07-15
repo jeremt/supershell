@@ -6,6 +6,7 @@ git.on('error', function (output) {
   console.log('GitError:', output);
 });
 
+git.refresh(1.0, 'resolve');
 // git.refresh(30.0, 'fetch');
 // git.refresh(1.0, ['files', 'rebasing']);
 // git.refresh(1.0, 'commits', 'all');
@@ -21,4 +22,5 @@ git.exec('open', '/tmp/sandbox').on('success', function () {
 
 git.exec('files').on('success', function (files) {
   console.log(files);
+  console.log(git);
 });

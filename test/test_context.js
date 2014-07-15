@@ -51,7 +51,7 @@ workspace.on('refresh', function () {
   console.log('Refresh workspace...');
 });
 
-workspace.refresh(500.0, 'list');
+workspace.refresh(0.5, 'list');
 
 workspace.on('error', function (output) {
   console.log('error: ', output);
