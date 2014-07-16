@@ -5,11 +5,16 @@ Simple utility to easily manipulate shell commands. The most important thing abo
 
 It's very easy-to-use, but it also provides some powerful features.
 
-Simple example:
+```coffee
+// it can be used very easily:
+var cmd = sh('ls | wc -l');
 
-```
-sh('ls').pipe('wc -l').on('success', function (output) {
-  console.log(output);
+// or if you prefere
+var cmd = sh('ls').pipe('wc -l')
+
+// and you can get the output through events:
+cmd.on('finish', function (output, code) {
+  console.log(code ? 'failed' : 'succeed', 'with output:', output);
 });
 ```
 
@@ -159,13 +164,19 @@ sh('lsHidden', ['-l']).on('success', function (output) {
 });
 ```
 
+Context
+-------
+
+A `Context` instance is an object which has its own scope and commands.
+
 TODO
 ----
 
 - handle pipes in json serialization
 - on progress event.
 - globing
-- queue
 - env
 - scripts
 - redirection << >> < >
+- cd command
+- exists command
