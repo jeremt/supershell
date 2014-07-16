@@ -167,7 +167,75 @@ sh('lsHidden', ['-l']).on('success', function (output) {
 Context
 -------
 
-A `Context` instance is an object which has its own scope and commands.
+A `Context` instance is an object which has its own scope and commands. It's useful if you want to gather commands which are related. It also allow to easily refresh scope from commands or execute commands under specific conditions (for a real use case, look at `lib/context/git/index.js`).
+
+Simple example:
+
+```js
+var sh = require('supershell');
+
+// Define your context
+var workspace = new sh.Context();
+
+workspace.scope.path = '$HOME/Work';
+workspace.scope.list = [];
+
+workspace.command('init', function (e) {
+  sh('mkdir', ['-p', this.scope.path])
+    .on('success', function () {
+      e.emit('success');
+    })
+    .on('fail', function (output) {
+      e.emit('fail', output);
+    });
+});
+
+workspace.command('create', function (e, name) {
+  var _this = this;
+  if (this.scope.list.indexOf(name) !== -1)
+    e.emit('fail', 'Project ' + name + 'already exists.', 'create');
+  else {
+    sh('mkdir', [this.scope.path + '/' + name])
+      .on('success', function (output) {
+        e.emit('success', output);
+      })
+      .on('fail', function (output) {
+        e.emit('fail', output);
+      });
+  }
+});
+
+workspace.command('list', function (e) {
+  var _this = this;
+  sh('ls', [_this.scope.path])
+    .pipe(sh.parsers.trim())
+    .pipe(sh.parsers.list())
+    .on('success', function (output) {
+      _this.scope.list = output;
+      e.emit('success');
+    })
+    .on('fail', function (output) {
+      e.emit('fail', output);
+    });
+});
+
+// Use it:
+
+workspace.on('refresh', function () {
+  console.log('Refresh workspace...');
+});
+
+workspace.refresh(0.5, 'list');
+
+workspace.exec('create', 'test')
+  .on('success', function () {
+    console.log('Create ok.');
+  })
+  .on('fail', function (output) {
+    console.log('failed: ' + output);
+  });
+
+```
 
 TODO
 ----
