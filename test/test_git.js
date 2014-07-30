@@ -1,6 +1,6 @@
 
 var sh = require('../')
-  , git = require('../lib/context/git');
+  , git = require('../').git;
 
 sh.log.mode = 'log';
 
