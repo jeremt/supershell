@@ -5,7 +5,7 @@
   "author": "Jeremie Taboada <taboada.jeremie@gmail.com>",
   "keywords": [
     "shell", "command", "stream", "utility", "tools", "async",
-    "asynchronous", "alias", "history"
+    "asynchronous", "alias", "history", "super"
   ],
   "repository": {
     "type": "git",
