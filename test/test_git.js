@@ -4,7 +4,7 @@ var sh = require('../')
 
 sh.log.mode = 'log';
 
-git.on('error', function (output) {
+git.on('fail', function (output) {
   console.log('GitError:', output);
 });
 
